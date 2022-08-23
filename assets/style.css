@@ -11,19 +11,46 @@ body{
 
 /* ------HEADER----- */
 header {
+    color: gray;
+    overflow: hidden;
 
 }
 
-header h1{
-
+.highscore-link{
+    float: left;
 }
 
-header p{
-
+.timer{
+    float: right;
 }
 
 /* -----MAIN----- */
 main{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.start-game{
 
 }
 
+.main-title {
+
+}
+
+.start-btn{
+
+}
+
+.quiz-cards{
+
+}
+
+.question{
+
+}
+
+.answer-btn{
+    
+}
