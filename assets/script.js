@@ -1,4 +1,6 @@
 // Define elements
+var startPage = document.getElementsByClassName('start-game');
+const startButton = document.getElementById('start-btn');
 var score = 0;
 var highscore = localStorage.getItem("highscore");
 
@@ -23,7 +25,7 @@ var questions = [
             'Code-Mania'
         ],
         correct: '.Code-Mania'
-    }
+    },
     {
         title: 'What is the purpose of a Boolean() function?',
         answers: [
@@ -33,7 +35,7 @@ var questions = [
             'to hold key-value pairs'
         ],
         correct: 'to find out if an expression is true'
-    }
+    },
     {
         title: 'Which of the following is not a part of the CSS Box Model?',
         answers: [
@@ -43,7 +45,7 @@ var questions = [
             'border'
         ],
         correct: 'card'
-    }
+    },
     {
         title: 'Where, in an HTML sheet, should a css stylesheet be linked?',
         answers: [
@@ -53,7 +55,7 @@ var questions = [
             'head'
         ],
         correct: 'head'
-    }
+    },
     {
         title: 'Which Javascript assignment operator assigns a remainder to a variable?',
         answers: [
@@ -66,9 +68,22 @@ var questions = [
     }
 ]
 
-// init function
+// init function (might not need)
+
+// event listeners start game
+startButton.addEventListener("click", startGame);
+// startBtn.onclick = startGame();
+
+// startBtn.addEventListener("click", startGame());
+
+// startBtn.attachEvent('onclick', startGame())
 
 // start game function
+function startGame() {
+    console.log('started');
+    
+    
+}
 
 // win game condition
 
@@ -79,20 +94,23 @@ var questions = [
 // render question and answers
 
 // update high score/initials and save to local storage (map)
-function setHighscore() {
+//starter added, alter
+// function setHighscore() {
 
-    if(highscore !== null){
-        if (score > highscore) {
-            localStorage.setItem("highscore", score);      
-        }
-    }
-    else{
-        localStorage.setItem("highscore", score);
-    }
-}
+//     if(highscore !== null){
+//         if (score > highscore) {
+//             localStorage.setItem("highscore", score);      
+//         }
+//     }
+//     else{
+//         localStorage.setItem("highscore", score);
+//     }
+// }
 
 
-// event listeners start game
+
+
+
 
 // event listener click "true" button, if else
 

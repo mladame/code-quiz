@@ -9,7 +9,7 @@
 
 <body>
     <header>
-        <div class="highscore-link">View Highscores</div>
+        <button class="highscore-btn">View Highscores</button>
         <div class="card timer">
             <div class = "timer-text"></div>
             <h3>Time: </h3> 
@@ -19,13 +19,13 @@
 
     <main class="card">
         <div class="container">
-        <section class="start-game" hidden>
+        <section class="start-game">
             <h1 class="main-title">Code Mania</h1>
             <p class="game-description">Welcome to Code Mania! A quiz with code-related questions.
                 This quiz is timed! You will have 60 seconds to answer 6 questions.
                 Everytime you answer wrong, time will be deducted. Good Luck!
             </p>
-            <button class="start-btn">Start!</button>
+            <button id="start-btn" class="start-btn">Start!</button>
         </section>
         
         <section class="quiz-cards" hidden>
@@ -48,7 +48,7 @@
             </form>
         </section>
 
-        <section class="view-highscores">
+        <section class="view-highscores" hidden>
             <h2>Highscores</h2>
             <!-- <div class="highscore"></div> -->
             <table>

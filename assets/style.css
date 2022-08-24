@@ -7,7 +7,7 @@
 
 *{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: 	#f0fff0;
+    background-color: 	var(--honeydew);
 }
 
 /* -----BODY----- */
@@ -18,15 +18,15 @@ body{
 
 /* ------HEADER----- */
 header {
-    color: gray;
     overflow: hidden;
 
 }
 
-.highscore-link{
-    float: left;
-    line-height: 60px;
-
+.highscore-btn{
+    font-size: 18px;
+    color: gray;
+    border: 0;
+    height: 60px;
 }
 
 .timer{
@@ -34,12 +34,16 @@ header {
     display: flex;
     flex-direction: row;
     height: auto;
+}
+
+.timer h3 {
     color: gray;
 }
 
 .timer-count {
     text-align: center;
     padding: 21px;
+    color: gray;
 }
 
 /* -----MAIN----- */
