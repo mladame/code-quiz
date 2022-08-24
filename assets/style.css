@@ -34,16 +34,16 @@ header {
     display: flex;
     flex-direction: row;
     height: auto;
-    justify-content: flex-start;
+    color: gray;
 }
 
 .timer-count {
     text-align: center;
-    padding: 21px 0;
+    padding: 21px;
 }
 
 /* -----MAIN----- */
-main{
+.card{
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -82,7 +82,6 @@ main{
 .quiz-question{
     font-size: 30px;
     text-align: left;
-    
 }
 
 .answer-pool{
@@ -138,4 +137,32 @@ input[type=submit] {
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
+}
+
+.view-highscores h2 {
+    font-size: 30px;
+}
+
+.go-back,
+.clear-scores {
+    background-color: var(--seagreen);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+
+table{
+    background-color: floralwhite;
+    border: 0;
+    text-align: center;
+    width: 279px;
+}
+
+.table-headers{
+    font-size: 20px;
 }
