@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Code Quiz!</title>
+    <title>Code Mania!</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="./assets/style.css" />
@@ -10,19 +10,23 @@
 <body>
     <header>
         <div class="highscore-link">View Highscores</div>
-        <div class="timer" >Timer</div>
+        <div class="timer">
+            <div class = "timer-text"></div>
+            <h3>Time: </h3> 
+            <div class="timer-count">60</div>
+        </div>
     </header>
 
     <main>
 
-        <section class="start-game">
+        <section class="start-game" hidden>
             <h1 class="main-title">Code Mania</h1>
             <p>Game desription here.</p>
             <button class="start-btn"></button>
         </section>
         
-        <section class="quiz-cards">
-            <h2 class="question">Write question here.</h2>
+        <section class="quiz-cards" hidden>
+            <h2 class="quiz-question">Write question here.</h2>
             <ol>
                 <li class="answer-btn">answer a</li>
                 <li class="answer-btn">answer b</li>
@@ -31,12 +35,16 @@
             </ol>
         </section>
 
-        <section class="sign-score">
-
+        <section class="sign-score" hidden>
+            <h2>All Done!</h2>
+            <div class="final-score"></div>
+            <form class="initials"></form>
         </section>
 
-        <section class="view-highscores">
-
+        <section class="view-highscores" hidden>
+            <div class="list-scores"></div>
+            <button class="go-back"></button>
+            <button class="clear-scores"></button>
         </section>
     </main>
 

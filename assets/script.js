@@ -1,6 +1,68 @@
 // Define elements
 
 // Question pool (array)
+var questions = [
+    {
+        title: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correct: ''
+    },
+    {
+        title: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correct: ''
+    }
+    {
+        title: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correct: ''
+    }
+    {
+        title: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correct: ''
+    }
+    {
+        title: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correct: ''
+    }
+    {
+        title: '',
+        answers: [
+            '',
+            '',
+            '',
+            ''
+        ],
+        correct: ''
+    }
+]
 
 // init function
 
@@ -21,3 +83,8 @@
 // event listener click "true" button, if else
 
 // reset game/play again
+
+
+
+
+// questions[0].answers
