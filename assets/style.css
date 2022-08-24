@@ -104,11 +104,20 @@ main{
     /* display: inline-block; */
     font-size: 15px;
     transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
 }
 
 .answer-btn:hover {
     color: rgba(255, 255, 255, 1);
     box-shadow: 0 5px 15px var(--darkseagreen);
+}
+
+.sign-score h3{
+    background-color: white;
+    width: 100px;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 input[type=text] {
@@ -118,6 +127,7 @@ input[type=text] {
     box-sizing: border-box;
     border-radius: 10px;
     background-color: white;
+    text-align: center;
 }
 
 input[type=submit] {

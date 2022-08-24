@@ -1,4 +1,6 @@
 // Define elements
+var score = 0;
+var highscore = localStorage.getItem("highscore");
 
 // Question pool (array)
 var questions = [
@@ -77,6 +79,18 @@ var questions = [
 // render question and answers
 
 // update high score/initials and save to local storage (map)
+function setHighscore() {
+
+    if(highscore !== null){
+        if (score > highscore) {
+            localStorage.setItem("highscore", score);      
+        }
+    }
+    else{
+        localStorage.setItem("highscore", score);
+    }
+}
+
 
 // event listeners start game
 
