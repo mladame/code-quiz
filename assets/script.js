@@ -3,64 +3,64 @@
 // Question pool (array)
 var questions = [
     {
-        title: '',
+        title: 'Which of the following is an HTML semantic element?',
         answers: [
-            '',
-            '',
-            '',
-            ''
+            'span',
+            'article',
+            'class',
+            'div'
         ],
-        correct: ''
+        correct: 'article'
     },
     {
-        title: '',
+        title: 'Which of the following shows the correct way to write class="Code-Mania"?',
         answers: [
-            '',
-            '',
-            '',
-            ''
+            '#Code-Mania',
+            '#code-mania',
+            '.Code-Mania',
+            'Code-Mania'
         ],
-        correct: ''
+        correct: '.Code-Mania'
     }
     {
-        title: '',
+        title: 'What is the purpose of a Boolean() function?',
         answers: [
-            '',
-            '',
-            '',
-            ''
+            'to find out if an expression is true',
+            'to hold a list of values',
+            'to run the same code over and over again',
+            'to hold key-value pairs'
         ],
-        correct: ''
+        correct: 'to find out if an expression is true'
     }
     {
-        title: '',
+        title: 'Which of the following is not a part of the CSS Box Model?',
         answers: [
-            '',
-            '',
-            '',
-            ''
+            'margin',
+            'card',
+            'padding',
+            'border'
         ],
-        correct: ''
+        correct: 'card'
     }
     {
-        title: '',
+        title: 'Where, in an HTML sheet, should a css stylesheet be linked?',
         answers: [
-            '',
-            '',
-            '',
-            ''
+            'header',
+            'body',
+            'footer',
+            'head'
         ],
-        correct: ''
+        correct: 'head'
     }
     {
-        title: '',
+        title: 'Which Javascript assignment operator assigns a remainder to a variable?',
         answers: [
-            '',
-            '',
-            '',
-            ''
+            '+=',
+            '/=',
+            '-=',
+            '%='
         ],
-        correct: ''
+        correct: '%='
     }
 ]
 
@@ -76,7 +76,7 @@ var questions = [
 
 // render question and answers
 
-// update high score/initials and save to local storage
+// update high score/initials and save to local storage (map)
 
 // event listeners start game
 
