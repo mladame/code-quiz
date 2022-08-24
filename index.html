@@ -19,7 +19,7 @@
 
     <main class="card">
         <div class="container">
-        <section class="start-game">
+        <section class="start-game" hidden>
             <h1 class="main-title">Code Mania</h1>
             <p class="game-description">Welcome to Code Mania! A quiz with code-related questions.
                 This quiz is timed! You will have 60 seconds to answer 6 questions.
@@ -30,7 +30,7 @@
         
         <section class="quiz-cards" hidden>
             <h2 class="quiz-question">Write question here.</h2>
-            <ol>
+            <ol class="answer-pool">
                 <li class="answer-btn">answer a</li>
                 <li class="answer-btn">answer b</li>
                 <li class="answer-btn">answer c</li>
@@ -38,10 +38,14 @@
             </ol>
         </section>
 
-        <section class="sign-score" hidden>
+        <section class="sign-score">
             <h2>All Done!</h2>
-            <div class="final-score"></div>
-            <form class="initials"></form>
+            <h3>Score: <span class="score-result">0 </span> </h3>
+            <form class="initials">
+                <label for="initials">Initials:</label><br>
+                <input type="text" id="initials" name="initials" value="WOW"><br><br>
+                <input type="submit" value="Submit">
+            </form>
         </section>
 
         <section class="view-highscores" hidden>

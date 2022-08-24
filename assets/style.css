@@ -1,6 +1,7 @@
 /* universal selector */
 :root{
     --seagreen: #2e8b57;
+    --darkseagreen: #8fbc8f;
     --honeydew: #f0fff0;
 }
 
@@ -80,9 +81,19 @@ main{
 
 .quiz-question{
     font-size: 30px;
+    text-align: left;
+    
+}
+
+.answer-pool{
+    
+    padding: 0;
+    margin: 0;
+    height: 220px;
 }
 
 .answer-btn{
+    display: block;
     background-color: var(--seagreen);
     border: none;
     border-radius: 10px;
@@ -90,6 +101,31 @@ main{
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 15px;
+    transition: all 0.2s ease-in-out;
+}
+
+.answer-btn:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px var(--darkseagreen);
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: white;
+}
+
+input[type=submit] {
+    background-color: var(--seagreen);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
 }
