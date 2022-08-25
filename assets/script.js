@@ -3,7 +3,8 @@ const startPage = document.getElementById('start-game');
 const startButton = document.getElementById('start-btn');
 var questionContainer = document.getElementById('question-container');
 var quizQuestion = document.getElementById('quiz-question');
-// var answerButtons = document.getElementById('answer-btn');
+var answerButtons = document.getElementsByClassName('answer-btn');
+var answerPool = document.getElementById('answer-pool');
 var answerBTNa = document.getElementById('answer-btn-a');
 var answerBTNb = document.getElementById('answer-btn-b');
 var answerBTNc = document.getElementById('answer-btn-c');
@@ -13,12 +14,11 @@ var viewHighscore = document.getElementById('view-highscores');
 var score = 0;
 var highscore = localStorage.getItem("highscore");
 
-// startPage.setAttribute('hidden', "false");
 questionContainer.setAttribute('style', 'display:none');
 signScore.setAttribute('style', 'display: none;');
 viewHighscore.setAttribute('style', 'display: none;');
 
-// Question pool (array)
+// Question pool
 var questions = [
     {
         question: 'Which of the following is an HTML semantic element?',
@@ -26,11 +26,6 @@ var questions = [
         answerB: ['article'],
         answerC: ['class'],
         answerD: ['div'],
-        // answers: [
-        //     ,
-        //     ',
-        //     ,
-        // ],
         correct: 'article'
     },
     {
@@ -39,12 +34,6 @@ var questions = [
         answerB: ['#code-mania'],
         answerC: ['.Code-Mania'],
         answerD: ['Code-Mania'],
-        // answers: [
-        //     ,
-        //     ,
-        //     ,
-            
-        // ],
         correct: '.Code-Mania'
     },
     {
@@ -53,12 +42,6 @@ var questions = [
         answerB: ['to hold a list of values'],
         answerC: ['to run the same code over and over again'],
         answerD: ['to hold key-value pairs'],
-        // answers: [
-        //     ,
-        //     ,
-        //     ,
-            
-        // ],
         correct: 'to find out if an expression is true'
     },
     {
@@ -67,12 +50,6 @@ var questions = [
         answerB: ['card'],
         answerC: ['padding'],
         answerD: ['border'],
-        // answers: [
-        //     ,
-        //     ,
-        //     ,
-            
-        // ],
         correct: 'card'
     },
     {
@@ -81,12 +58,6 @@ var questions = [
         answerB: ['body'],
         answerC: ['footer'],
         answerD: ['head'],
-        // answers: [
-        //     ,
-        //     ,
-        //     ,
-            
-        // ],
         correct: 'head'
     },
     {
@@ -95,21 +66,12 @@ var questions = [
         answerB: ['/='],
         answerC: ['-='],
         answerD: ['%='],
-        // answers: [
-        //     ,
-        //     ,
-        //     ,
-            
-        // ],
         correct: '%='
     }
 ]
 
-// init function (might not need)
-
 // Start Game
 startButton.addEventListener("click", startGame);
-
 function startGame() {
     startPage.setAttribute('style', 'display: none;')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
@@ -124,10 +86,7 @@ function startTimer(){
 }
 
 function nextQuestion(){
-    console.log("questions should appear");
-
     questionContainer.setAttribute('style', 'display: block;')
-
     showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 
@@ -140,6 +99,16 @@ function showQuestion(){
     answerBTNb.textContent=questions[currentQuestionIndex].answerB;
     answerBTNc.textContent=questions[currentQuestionIndex].answerC;
     answerBTNd.textContent=questions[currentQuestionIndex].answerD;
+}
+
+answerPool.addEventListener('click', checkAnswer)
+function checkAnswer(event) {
+    if (event.target.matches('answerButtons')){
+        if (event.target.matches('correct')) {
+            // add 10 points and give me another question until there are no more, and all points are added up
+    }
+    }
+    
 }
 
 // // Add up correct answers
