@@ -10,9 +10,12 @@ var answerBTNb = document.getElementById('answer-btn-b');
 var answerBTNc = document.getElementById('answer-btn-c');
 var answerBTNd = document.getElementById('answer-btn-d');
 var signScore = document.getElementById('sign-score');
+var scoreResultDisplay = document.getElementById('score-results');
 var viewHighscore = document.getElementById('view-highscores');
-var score = 0;
+var scoreCounter = 0;
+var deductionCounter = 0;
 var highscore = localStorage.getItem("highscore");
+var initials = localStorage.getItem('initials')
 
 questionContainer.setAttribute('style', 'display:none');
 signScore.setAttribute('style', 'display: none;');
@@ -93,8 +96,6 @@ function nextQuestion(){
 function showQuestion(){
     console.log('question here');
     quizQuestion.textContent=questions[currentQuestionIndex].question;
-    // answerButtons.textContent=questions[currentQuestionIndex].answers;
-    // quizQuestion.innerText=questions.question;
     answerBTNa.textContent=questions[currentQuestionIndex].answerA;
     answerBTNb.textContent=questions[currentQuestionIndex].answerB;
     answerBTNc.textContent=questions[currentQuestionIndex].answerC;
@@ -111,6 +112,20 @@ function checkAnswer(event) {
     
 }
 
+function setScore() {
+    scoreResultDisplay.textContent = scoreCounter;
+    localStorage.setItem("highscore", scoreCounter);
+}
+
+function getscore() {
+    var storedScore = localStorage.getItem("highscore");
+    if (storedScore === null) {
+        scoreCounter = 0;
+    } else {
+        scoreCounter = storedScore;
+    }
+    scoreResultDisplay.textContent = scoreCounter;
+}
 // // Add up correct answers
 // answerButtons.addEventListener('click', selectAnswer());
 // function selectAnswer() {
