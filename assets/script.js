@@ -1,8 +1,17 @@
 // Define elements
-var startPage = document.getElementsByClassName('start-game');
+const startPage = document.getElementById('start-game');
 const startButton = document.getElementById('start-btn');
+var questionContainer = document.getElementById('question-container');
+var answerButtons = document.getElementById('answer-btn');
+var signScore = document.getElementById('sign-score');
+var viewHighscore = document.getElementById('view-highscores');
 var score = 0;
 var highscore = localStorage.getItem("highscore");
+
+// startPage.setAttribute('hidden', "false");
+questionContainer.setAttribute('hidden', true);
+signScore.setAttribute('hidden', true);
+viewHighscore.setAttribute('hidden', true);
 
 // Question pool (array)
 var questions = [
@@ -72,18 +81,37 @@ var questions = [
 
 // event listeners start game
 startButton.addEventListener("click", startGame);
-// startBtn.onclick = startGame();
-
-// startBtn.addEventListener("click", startGame());
-
-// startBtn.attachEvent('onclick', startGame())
 
 // start game function
 function startGame() {
-    console.log('started');
-    
-    
+    // console.log('started');
+    startPage.setAttribute("hidden", true)
+    // startPage.classList.add('hide')
+    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    currentQuestionIndex = 0
+
+    // questionContainer.classList.remove('hide')
+    // startPage.style.display = 'none';
+    nextQuestion()
+    // startTimer()
+    // need a getscore() function that tracks true/false/correct responses
 }
+
+function nextQuestion(){
+    console.log("questions should appear");
+
+    questionContainer.setAttribute('hidden', false)
+    showQuestion(shuffledQuestions[currentQuestionIndex])
+}
+
+function startTimer(){
+
+}
+
+function showQuestion(){
+    console.log('question here');
+}
+
 
 // win game condition
 

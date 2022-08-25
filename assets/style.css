@@ -12,9 +12,6 @@
 
 /* -----BODY----- */
 
-body{
-
-}
 
 /* ------HEADER----- */
 header {
@@ -77,10 +74,12 @@ header {
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
+    transition: all 0.2s ease-in-out;
 }
 
-.quiz-cards{
-
+.start-btn:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px var(--darkseagreen);
 }
 
 .quiz-question{
@@ -158,6 +157,13 @@ input[type=submit] {
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
+    transition: all 0.2s ease-in-out;
+}
+
+.go-back,
+.clear-scores:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px var(--darkseagreen);
 }
 
 table{
