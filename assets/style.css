@@ -94,7 +94,10 @@ header {
     height: 220px;
 }
 
-.answer-btn{
+#answer-btn-a, 
+#answer-btn-b,
+#answer-btn-c,
+#answer-btn-d {
     display: block;
     background-color: var(--seagreen);
     border: none;
@@ -109,7 +112,10 @@ header {
     margin-bottom: 10px;
 }
 
-.answer-btn:hover {
+#answer-btn-a, 
+#answer-btn-b,
+#answer-btn-c,
+#answer-btn-d:hover {
     color: rgba(255, 255, 255, 1);
     box-shadow: 0 5px 15px var(--darkseagreen);
 }
