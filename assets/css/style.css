@@ -37,9 +37,9 @@ header {
     color: gray;
 }
 
-.timer-count {
+#timer-count {
     text-align: center;
-    padding: 21px;
+    margin: 21px;
     color: gray;
 }
 
@@ -104,17 +104,17 @@ header {
     border-radius: 10px;
     color: white;
     padding: 15px 32px;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
-    /* display: inline-block; */
     font-size: 15px;
     transition: all 0.2s ease-in-out;
     margin-bottom: 10px;
+    width: fit-content;
 }
 
-#answer-btn-a, 
-#answer-btn-b,
-#answer-btn-c,
+#answer-btn-a:hover, 
+#answer-btn-b:hover,
+#answer-btn-c:hover,
 #answer-btn-d:hover {
     color: rgba(255, 255, 255, 1);
     box-shadow: 0 5px 15px var(--darkseagreen);

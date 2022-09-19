@@ -1,5 +1,5 @@
 // Define elements
-const startPage = document.getElementById('start-game');
+const startCard = document.getElementById('start-game');
 const startButton = document.getElementById('start-btn');
 var questionContainer = document.getElementById('question-container');
 var quizQuestion = document.getElementById('quiz-question');
@@ -12,86 +12,116 @@ var answerBTNd = document.getElementById('answer-btn-d');
 var signScore = document.getElementById('sign-score');
 var scoreResultDisplay = document.getElementById('score-results');
 var viewHighscore = document.getElementById('view-highscores');
+var timerDisplay = document.getElementById('timer-count');
+var time = 60;
 var scoreCounter = 0;
-var deductionCounter = 0;
 var highscore = localStorage.getItem("highscore");
 var initials = localStorage.getItem('initials')
 
+// START WORKING CODE
 questionContainer.setAttribute('style', 'display:none');
 signScore.setAttribute('style', 'display: none;');
 viewHighscore.setAttribute('style', 'display: none;');
 
-// Question pool
+// QUESTION POOL
 var questions = [
     {
         question: 'Which of the following is an HTML semantic element?',
-        answerA: ['span'],
-        answerB: ['article'],
-        answerC: ['class'],
-        answerD: ['div'],
-        correct: 'article'
+        answerA: ['a. span'],
+        answerB: ['b. article'],
+        answerC: ['c. class'],
+        answerD: ['d. div'],
+        correct: 'b. article'
     },
     {
-        question: 'Which of the following shows the correct way to write class="Code-Mania"?',
-        answerA: ['#Code-Mania'],
-        answerB: ['#code-mania'],
-        answerC: ['.Code-Mania'],
-        answerD: ['Code-Mania'],
-        correct: '.Code-Mania'
+        question: 'Which of the following shows the correct way to write: class="Code-Mania"?',
+        answerA: ['a. #Code-Mania'],
+        answerB: ['b. #code-mania'],
+        answerC: ['c. .Code-Mania'],
+        answerD: ['d. Code-Mania'],
+        correct: 'c. .Code-Mania'
     },
     {
         question: 'What is the purpose of a Boolean() function?',
-        answerA: ['to find out if an expression is true'],
-        answerB: ['to hold a list of values'],
-        answerC: ['to run the same code over and over again'],
-        answerD: ['to hold key-value pairs'],
-        correct: 'to find out if an expression is true'
+        answerA: ['a. to find out if an expression is true'],
+        answerB: ['b. to hold a list of values'],
+        answerC: ['c. to run the same code over and over again'],
+        answerD: ['d. to hold key-value pairs'],
+        correct: 'a. to find out if an expression is true'
     },
     {
         question: 'Which of the following is not a part of the CSS Box Model?',
-        answerA: ['margin'],
-        answerB: ['card'],
-        answerC: ['padding'],
-        answerD: ['border'],
-        correct: 'card'
+        answerA: ['a. margin'],
+        answerB: ['b. card'],
+        answerC: ['c. padding'],
+        answerD: ['d. border'],
+        correct: 'b. card'
     },
     {
         question: 'Where, in an HTML sheet, should a css stylesheet be linked?',
-        answerA: ['header'],
-        answerB: ['body'],
-        answerC: ['footer'],
-        answerD: ['head'],
-        correct: 'head'
+        answerA: ['a. header'],
+        answerB: ['b. body'],
+        answerC: ['c. footer'],
+        answerD: ['d. head'],
+        correct: 'd. head'
     },
     {
         question: 'Which Javascript assignment operator assigns a remainder to a variable?',
-        answerA: ['+='],
-        answerB: ['/='],
-        answerC: ['-='],
-        answerD: ['%='],
-        correct: '%='
+        answerA: ['a. +='],
+        answerB: ['b. /='],
+        answerC: ['c. -='],
+        answerD: ['d. %='],
+        correct: 'd. %='
     }
 ]
 
-// Start Game
+//* START GAME
 startButton.addEventListener("click", startGame);
 function startGame() {
-    startPage.setAttribute('style', 'display: none;')
+    startCard.setAttribute('style', 'display: none;')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
-    nextQuestion()
-    // startTimer()
+    setQuestion()
+    startTimer()
     // need a getscore() function that tracks true/false/correct responses
 }
 
+// START TIMER
 function startTimer(){
+    var timerInterval = setInterval(function(){
+        timerDisplay.textContent = time;
+        time--;
 
+        if (time === 0) {
+            clearInterval(timerInterval);
+            // gameOver();
+        } else  if(questionQuestionIndex >= shuffledQuestions.length +1) {
+            clearInterval(timerInterval);
+            gameOver();
+            } 
+        }, 1000);
 }
 
-function nextQuestion(){
+
+//  SETS QUESTIONS IN THE QUIZ
+function setQuestion(){
     questionContainer.setAttribute('style', 'display: block;')
     showQuestion(shuffledQuestions[currentQuestionIndex])
-}
+
+    // USER CLICKS ON ANSWER
+    answerPool.addEventListener('click', checkAnswer)
+    function checkAnswer(event) {
+        if (event.target.matches('answerButtons')){
+            if (event.target.matches('correct')) {
+                // add 10 points and give me another question until there are no more, and all points are added up  
+                
+            } else {
+                // deduct 10 seconds from timer, got to next question, display answer
+            }
+        }
+}}
+
+// getscore()
 
 function showQuestion(){
     console.log('question here');
@@ -102,36 +132,32 @@ function showQuestion(){
     answerBTNd.textContent=questions[currentQuestionIndex].answerD;
 }
 
-answerPool.addEventListener('click', checkAnswer)
-function checkAnswer(event) {
-    if (event.target.matches('answerButtons')){
-        if (event.target.matches('correct')) {
-            // add 10 points and give me another question until there are no more, and all points are added up
-    }
-    }
-    
-}
+// function setScore() {
+//     scoreResultDisplay.textContent = scoreCounter;
+//     localStorage.setItem("highscore", scoreCounter);
+// }
 
-function setScore() {
-    scoreResultDisplay.textContent = scoreCounter;
-    localStorage.setItem("highscore", scoreCounter);
-}
+// function getscore() {
+//     var storedScore = localStorage.getItem("highscore");
+//     if (storedScore === null) {
+//         scoreCounter = 0;
+//     } else {
+//         scoreCounter = storedScore;
+//     }
+//     scoreResultDisplay.textContent = scoreCounter;
+// }
 
-function getscore() {
-    var storedScore = localStorage.getItem("highscore");
-    if (storedScore === null) {
-        scoreCounter = 0;
-    } else {
-        scoreCounter = storedScore;
-    }
-    scoreResultDisplay.textContent = scoreCounter;
-}
+// function gameOver() {
+
+//     setScore()
+// }
+
+
 // // Add up correct answers
 // answerButtons.addEventListener('click', selectAnswer());
 // function selectAnswer() {
 
 // }
-
 
 // win game condition
 
@@ -154,17 +180,3 @@ function getscore() {
 //         localStorage.setItem("highscore", score);
 //     }
 // }
-
-
-
-
-
-
-// event listener click "true" button, if else
-
-// reset game/play again
-
-
-
-
-// questions[0].answers
