@@ -1,20 +1,26 @@
 //* DEFINE ELEMENTS
 const startCard = document.getElementById('start-game');
 const startButton = document.getElementById('start-btn');
-var questionContainer = document.getElementById('question-container');
-var quizQuestion = document.getElementById('quiz-question');
-var answerButtons = document.querySelector('.answer-btn');
-var answerPool = document.getElementById('answer-pool');
-var answerBTNa = document.getElementById('answer-btn-a');
-var answerBTNb = document.getElementById('answer-btn-b');
-var answerBTNc = document.getElementById('answer-btn-c');
-var answerBTNd = document.getElementById('answer-btn-d');
-var signScore = document.getElementById('sign-score');
-var scoreResultDisplay = document.getElementById('score-results');
-var viewHighscore = document.getElementById('view-highscores');
+
+const questionContainer = document.getElementById('question-container');
+const quizQuestion = document.getElementById('quiz-question');
+
+const answerButtons = document.querySelector('.answer-btn');
+const answerPool = document.getElementById('answer-pool');
+const answerBTNa = document.getElementById('answer-btn-a');
+const answerBTNb = document.getElementById('answer-btn-b');
+const answerBTNc = document.getElementById('answer-btn-c');
+const answerBTNd = document.getElementById('answer-btn-d');
+
+const signScore = document.getElementById('sign-score');
+const scoreResultDisplay = document.getElementById('score-results');
+const viewHighscore = document.getElementById('view-highscores');
+var scoreCounter = 0;
+var highscoresArr = [];
+
 var timerDisplay = document.getElementById('timer-count');
 var time = 60;
-var scoreCounter = 0;
+
 var currentQuestionIndex = 0;
 var currentQuestionNumber = 1;
 var highscore = localStorage.getItem("highscore");
@@ -29,19 +35,16 @@ viewHighscore.setAttribute('style', 'display: none;');
 var questions = [
     {
         question: 'Which of the following is an HTML semantic element?',
-        answerA: ['a. span'],
-        answerB: ['b. article'],
-        answerC: ['c. class'],
-        answerD: ['d. div'],
+        choices: ['a. span', 'b. article', 'c. class', 'd. div'],
         correct: 'b. article'
     },
     {
-        question: 'Which of the following shows the correct way to write: class="Code-Mania"?',
-        answerA: ['a. #Code-Mania'],
-        answerB: ['b. #code-mania'],
-        answerC: ['c. .Code-Mania'],
-        answerD: ['d. Code-Mania'],
-        correct: 'c. .Code-Mania'
+        question: 'Which of the following shows the correct way to define: class="Code-Mania"?',
+        answerA: ['a.  #Code-Mania'],
+        answerB: ['b.  #code-mania'],
+        answerC: ['c.  .Code-Mania'],
+        answerD: ['d.  Code-Mania'],
+        correct: 'c.  .Code-Mania'
     },
     {
         question: 'What is the purpose of a Boolean() function?',
@@ -87,15 +90,17 @@ var questions = [
         // displays question and starts timer
         setQuestion();
         startTimer();
+
     }
 
 //* START TIMER
     function startTimer(){
+        
         var timerInterval = setInterval(function(){
-            timerDisplay.textContent = time + "s";
+            timerDisplay.textContent = time + " s";
             time--;
 
-            if (time === 0) {
+            if (time === 1) {
                 clearInterval(timerInterval);
                 // gameOver();
             } else  if(currentQuestionNumber >= shuffledQuestions.length +1) {
@@ -112,36 +117,34 @@ var questions = [
         showQuestion(shuffledQuestions[currentQuestionIndex])
     }
 
-// USER CLICKS ON ANSWER
+//* SETS CURRENT QUESTION TO PAGE
+function showQuestion(){
+    quizQuestion.textContent=questions[currentQuestionIndex].question;
+    for (i = 0; i < answersEl.children.length; i++) {
+        answerPool.children[i].children[0].textContent = `${(i + 1)}: ${questions[currentQuestionIndex].choices[i]}`;
+    }
+}
+
+//* CHECK ANSWER
     answerButtons.addEventListener('click', checkAnswer)
     function checkAnswer(event) {
-        
-        // if (event.target.matches('answerButtons')){
-            console.log("clicked");
-            if (event.target.matches('correct')) {
+        if (event.currentTarget == shuffledQuestions[currentQuestionIndex].correct) {
                 // add 10 points and give me another question until there are no more, and all points are added up  
                 scoreCounter = scoreCounter + 10; 
+            if (currentQuestionIndex < shuffledQuestions.length -1) {
+                setQuestion(currentQuestionIndex + 1);
+                } else {
+                    // gameOver();
+                }
+                currentQuestionNumber++;
             } else {
                 // deduct 10 seconds from timer, got to next question, display answer
                 time = time - 10;
             }
         // }
-        if (currentQuestionIndex < shuffledQuestions.length -1) {
-            setQuestion(currentQuestionIndex + 1);
-        } else {
-            // gameOver();
-        }
-    currentQuestionNumber++;
+
     }
 
-//* SETS CURRENT QUESTION TO PAGE
-function showQuestion(i){
-    quizQuestion.textContent=questions[currentQuestionIndex].question;
-    answerBTNa.textContent=questions[currentQuestionIndex].answerA;
-    answerBTNb.textContent=questions[currentQuestionIndex].answerB;
-    answerBTNc.textContent=questions[currentQuestionIndex].answerC;
-    answerBTNd.textContent=questions[currentQuestionIndex].answerD;
-}
 
 // function setScore() {
 //     scoreResultDisplay.textContent = scoreCounter;
