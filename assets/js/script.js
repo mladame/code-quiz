@@ -1,9 +1,9 @@
-// Define elements
+//* DEFINE ELEMENTS
 const startCard = document.getElementById('start-game');
 const startButton = document.getElementById('start-btn');
 var questionContainer = document.getElementById('question-container');
 var quizQuestion = document.getElementById('quiz-question');
-var answerButtons = document.getElementsByClassName('answer-btn');
+var answerButtons = document.querySelector('.answer-btn');
 var answerPool = document.getElementById('answer-pool');
 var answerBTNa = document.getElementById('answer-btn-a');
 var answerBTNb = document.getElementById('answer-btn-b');
@@ -15,15 +15,17 @@ var viewHighscore = document.getElementById('view-highscores');
 var timerDisplay = document.getElementById('timer-count');
 var time = 60;
 var scoreCounter = 0;
+var currentQuestionIndex = 0;
+var currentQuestionNumber = 1;
 var highscore = localStorage.getItem("highscore");
 var initials = localStorage.getItem('initials')
 
-// START WORKING CODE
+//* START WORKING CODE
 questionContainer.setAttribute('style', 'display:none');
 signScore.setAttribute('style', 'display: none;');
 viewHighscore.setAttribute('style', 'display: none;');
 
-// QUESTION POOL
+//* QUESTION POOL
 var questions = [
     {
         question: 'Which of the following is an HTML semantic element?',
@@ -76,55 +78,64 @@ var questions = [
 ]
 
 //* START GAME
-startButton.addEventListener("click", startGame);
-function startGame() {
-    startCard.setAttribute('style', 'display: none;')
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
-    setQuestion()
-    startTimer()
-    // need a getscore() function that tracks true/false/correct responses
-}
+    startButton.addEventListener("click", startGame);
+    function startGame() {
+        startCard.setAttribute('style', 'display: none;');
+        // new question array
+        shuffledQuestions = questions.sort(() => Math.random() - .5);
 
-// START TIMER
-function startTimer(){
-    var timerInterval = setInterval(function(){
-        timerDisplay.textContent = time;
-        time--;
+        // displays question and starts timer
+        setQuestion();
+        startTimer();
+    }
 
-        if (time === 0) {
-            clearInterval(timerInterval);
-            // gameOver();
-        } else  if(questionQuestionIndex >= shuffledQuestions.length +1) {
-            clearInterval(timerInterval);
-            gameOver();
-            } 
-        }, 1000);
-}
+//* START TIMER
+    function startTimer(){
+        var timerInterval = setInterval(function(){
+            timerDisplay.textContent = time + "s";
+            time--;
+
+            if (time === 0) {
+                clearInterval(timerInterval);
+                // gameOver();
+            } else  if(currentQuestionNumber >= shuffledQuestions.length +1) {
+                clearInterval(timerInterval);
+                // gameOver();
+                } 
+            }, 1000);
+    }
 
 
-//  SETS QUESTIONS IN THE QUIZ
-function setQuestion(){
-    questionContainer.setAttribute('style', 'display: block;')
-    showQuestion(shuffledQuestions[currentQuestionIndex])
+//*  SETS QUESTIONS IN THE QUIZ
+    function setQuestion(){
+        questionContainer.setAttribute('style', 'display: block;')
+        showQuestion(shuffledQuestions[currentQuestionIndex])
+    }
 
-    // USER CLICKS ON ANSWER
-    answerPool.addEventListener('click', checkAnswer)
+// USER CLICKS ON ANSWER
+    answerButtons.addEventListener('click', checkAnswer)
     function checkAnswer(event) {
-        if (event.target.matches('answerButtons')){
+        
+        // if (event.target.matches('answerButtons')){
+            console.log("clicked");
             if (event.target.matches('correct')) {
                 // add 10 points and give me another question until there are no more, and all points are added up  
-                
+                scoreCounter = scoreCounter + 10; 
             } else {
                 // deduct 10 seconds from timer, got to next question, display answer
+                time = time - 10;
             }
+        // }
+        if (currentQuestionIndex < shuffledQuestions.length -1) {
+            setQuestion(currentQuestionIndex + 1);
+        } else {
+            // gameOver();
         }
-}}
+    currentQuestionNumber++;
+    }
 
-// getscore()
-
-function showQuestion(){
-    console.log('question here');
+//* SETS CURRENT QUESTION TO PAGE
+function showQuestion(i){
     quizQuestion.textContent=questions[currentQuestionIndex].question;
     answerBTNa.textContent=questions[currentQuestionIndex].answerA;
     answerBTNb.textContent=questions[currentQuestionIndex].answerB;
