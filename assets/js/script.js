@@ -40,42 +40,27 @@ var questions = [
     },
     {
         question: 'Which of the following shows the correct way to define: class="Code-Mania"?',
-        answerA: ['a.  #Code-Mania'],
-        answerB: ['b.  #code-mania'],
-        answerC: ['c.  .Code-Mania'],
-        answerD: ['d.  Code-Mania'],
+        choices: ['a.  #Code-Mania', 'b.  #code-mania', 'c.  .Code-Mania', 'd.  Code-Mania'],
         correct: 'c.  .Code-Mania'
     },
     {
         question: 'What is the purpose of a Boolean() function?',
-        answerA: ['a. to find out if an expression is true'],
-        answerB: ['b. to hold a list of values'],
-        answerC: ['c. to run the same code over and over again'],
-        answerD: ['d. to hold key-value pairs'],
+        choices: ['a. to find out if an expression is true', 'b. to hold a list of values', 'c. to run the same code over and over again', 'd. to hold key-value pairs'],
         correct: 'a. to find out if an expression is true'
     },
     {
         question: 'Which of the following is not a part of the CSS Box Model?',
-        answerA: ['a. margin'],
-        answerB: ['b. card'],
-        answerC: ['c. padding'],
-        answerD: ['d. border'],
+        choices: ['a. margin', 'b. card', 'c. padding', 'd. border'],
         correct: 'b. card'
     },
     {
         question: 'Where, in an HTML sheet, should a css stylesheet be linked?',
-        answerA: ['a. header'],
-        answerB: ['b. body'],
-        answerC: ['c. footer'],
-        answerD: ['d. head'],
+        choices: ['a. header', 'b. body', 'c. footer', 'd. head'],
         correct: 'd. head'
     },
     {
         question: 'Which Javascript assignment operator assigns a remainder to a variable?',
-        answerA: ['a. +='],
-        answerB: ['b. /='],
-        answerC: ['c. -='],
-        answerD: ['d. %='],
+        choices: ['a. +=', 'b. /=', 'c. -=', 'd. %='],
         correct: 'd. %='
     }
 ]
@@ -120,9 +105,9 @@ var questions = [
 //* SETS CURRENT QUESTION TO PAGE
 function showQuestion(){
     quizQuestion.textContent=questions[currentQuestionIndex].question;
-    for (i = 0; i < answersEl.children.length; i++) {
-        answerPool.children[i].children[0].textContent = `${(i + 1)}: ${questions[currentQuestionIndex].choices[i]}`;
-    }
+    for (i = 0; i < answerPool.children.length; i++) {
+        answerPool.children[i].textContent = shuffledQuestions[currentQuestionIndex].choices[i];
+    };
 }
 
 //* CHECK ANSWER
