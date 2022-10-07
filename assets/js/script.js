@@ -10,7 +10,7 @@ const answerPool = document.getElementById('answer-pool');
 
 const signScore = document.getElementById('sign-score');
 const scoreResultDisplay = document.getElementById('score-result');
-const userInitials = document.getElementById('intials');
+const userInitials = document.getElementById('initials');
 const viewHighscore = document.getElementById('view-highscores');
 var timerDisplay = document.getElementById('timer-count');
 var isWin = false;
@@ -139,6 +139,7 @@ function nextQuestion() {
         questionContainer.setAttribute('style', 'display:none;');
         signScore.setAttribute('style', 'display: block;');
         scoreResultDisplay.textContent = scoreCounter;
+        timerDisplay.textContent = '0';
     }
 
 } 
@@ -150,17 +151,32 @@ function gameover() {
 
 //* SIGN HIGHSCORE------------------------------------------------------------
 document.getElementById("submit-signature").addEventListener("click", setScore);
-
-
 function setScore() {
-    const signature = userInitials.value; 
-    console.log(signature);
-    // scoreResultDisplay.textContent = scoreCounter;
-    // localStorage.setItem("highscore", scoreCounter);
+    // get existing scores
+    if (!!localStorage.getItem('scoreboard')){
+        let previousScores = JSON.parse(localStorage.getItem('scoreboard'));
+        highscoresArr.push(previousScores);
+    }
+    // define new score
+    const signature = userInitials.value.trim();
+    const highScores = {
+        user: signature,
+        score: scoreCounter
+    };
+    // save new score with existing scores and save to local storage
+    highscoresArr.push(highScores)
+    localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
+
+    signScore.setAttribute('style', 'display:none;');
+    viewHighscore.setAttribute('style', 'display:block;')
+
+    getScore();
 }
 
-// function getscore() {
-//     var storedScore = localStorage.getItem("highscore");
+//* VIEW HIGH SCORES------------------------------------------------------------- 
+document.getElementById("highscore-btn").addEventListener("click", getScore);
+// function getScore() {
+//     var storedScore = localStorage.getItem("scoreboard");
 //     if (storedScore === null) {
 //         scoreCounter = 0;
 //     } else {
