@@ -5,7 +5,7 @@ const startButton = document.getElementById('start-btn');
 const questionContainer = document.getElementById('question-container');
 const quizQuestion = document.getElementById('quiz-question');
 
-const answerButtons = document.querySelector('.answer-btn');
+const answerBTNS = document.getElementsByClassName('answer-btn');
 const answerPool = document.getElementById('answer-pool');
 
 const signScore = document.getElementById('sign-score');
@@ -97,12 +97,12 @@ function startTimer() {
 function setQuestion() {
     // make question container visible
     questionContainer.setAttribute('style', 'display: block;')
-    // call showQuestion() with shuffled questions
-    showQuestion(shuffledQs[qIndex])
+    // call renderQuestion() with shuffled questions
+    renderQuestion(shuffledQs[qIndex])
 }
 
-//* SETS SHUFFLED QUESTIONS TO PAGE---------------------------------------------
-function showQuestion() {
+//* RENDERS SHUFFLED QUESTIONS TO PAGE---------------------------------------------
+function renderQuestion() {
     // display current question
     quizQuestion.textContent = questions[qIndex].question;
     // display current and corresponding questions
@@ -112,13 +112,15 @@ function showQuestion() {
 }
 
 //* CHECKS ANSWER-------------------------------------------------------------------
-answerButtons.addEventListener("click", function (event) {
-    checkAnswer(event.target);
-    console.log("clicked");
+document.getElementById("answer-pool").addEventListener("click", checkAnswer);
+    // checkAnswer(event.target);
+    // console.log("clicked");
     // set next question
-})
+
 function checkAnswer(event) {
-    if (shuffledQs[qIndex].correct == shuffledQs[qIndex].choices[event.target]) {
+    const answer = event.target;
+    console.log(answer.innerHTML);
+    if (shuffledQs[qIndex].correct == answer.innerHTML) {
         scoreCounter += 10;
         console.log(scoreCounter);
     } else {
