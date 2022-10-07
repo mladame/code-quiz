@@ -9,7 +9,8 @@ const answerBTNS = document.getElementsByClassName('answer-btn');
 const answerPool = document.getElementById('answer-pool');
 
 const signScore = document.getElementById('sign-score');
-const scoreResultDisplay = document.getElementById('score-results');
+const scoreResultDisplay = document.getElementById('score-result');
+const userInitials = document.getElementById('intials');
 const viewHighscore = document.getElementById('view-highscores');
 var timerDisplay = document.getElementById('timer-count');
 var isWin = false;
@@ -100,7 +101,7 @@ function setQuestion() {
     renderQuestion(shuffledQs[qIndex])
 }
 
-//* RENDERS SHUFFLED QUESTIONS TO PAGE---------------------------------------------
+//* RENDERS SHUFFLED QUESTIONS TO PAGE------------------------------------------
 function renderQuestion() {
     // display current question
     quizQuestion.textContent = questions[qIndex].question;
@@ -110,11 +111,11 @@ function renderQuestion() {
     };
 }
 
-//* CHECKS ANSWER-------------------------------------------------------------------
+//* CHECKS ANSWER---------------------------------------------------------------
 document.getElementById("answer-pool").addEventListener("click", checkAnswer);
 function checkAnswer(event) {
+    
     const answer = event.target;
-    console.log(answer.innerHTML);
     if (shuffledQs[qIndex].correct == answer.innerHTML) {
         scoreCounter += 10;
         console.log(scoreCounter);
@@ -126,7 +127,7 @@ function checkAnswer(event) {
 
 }
 
-//* SET NEXT QUESTION------------------------------------------------------------------
+//* SET NEXT QUESTION---------------------------------------------------------
 function nextQuestion() {
     // increment current question index
     qIndex++;
@@ -135,21 +136,28 @@ function nextQuestion() {
         renderQuestion();
     } else {
         gameover();
-        scoreResultDisplay.textContent = scoreCounter;
         questionContainer.setAttribute('style', 'display:none;');
-        signScore.setAttribute('style', 'display: flex;');
+        signScore.setAttribute('style', 'display: block;');
+        scoreResultDisplay.textContent = scoreCounter;
     }
 
 } 
 
+//* GAME OVER---------------------------------------------------------------- 
 function gameover() {
     clearInterval(timer);
 }
 
-// function setScore() {
-//     scoreResultDisplay.textContent = scoreCounter;
-//     localStorage.setItem("highscore", scoreCounter);
-// }
+//* SIGN HIGHSCORE------------------------------------------------------------
+document.getElementById("submit-signature").addEventListener("click", setScore);
+
+
+function setScore() {
+    const signature = userInitials.value; 
+    console.log(signature);
+    // scoreResultDisplay.textContent = scoreCounter;
+    // localStorage.setItem("highscore", scoreCounter);
+}
 
 // function getscore() {
 //     var storedScore = localStorage.getItem("highscore");
@@ -161,25 +169,6 @@ function gameover() {
 //     scoreResultDisplay.textContent = scoreCounter;
 // }
 
-// function gameOver() {
-
-//     setScore()
-// }
-
-
-// // Add up correct answers
-// answerButtons.addEventListener('click', selectAnswer());
-// function selectAnswer() {
-
-// }
-
-// win game condition
-
-// lose game function
-
-// start timer funtion
-
-// render question and answers
 
 // update high score/initials and save to local storage (map)
 //starter added, alter
