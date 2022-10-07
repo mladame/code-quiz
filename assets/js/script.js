@@ -7,29 +7,20 @@ const quizQuestion = document.getElementById('quiz-question');
 
 const answerButtons = document.querySelector('.answer-btn');
 const answerPool = document.getElementById('answer-pool');
-const answerBTNa = document.getElementById('answer-btn-a');
-const answerBTNb = document.getElementById('answer-btn-b');
-const answerBTNc = document.getElementById('answer-btn-c');
-const answerBTNd = document.getElementById('answer-btn-d');
 
 const signScore = document.getElementById('sign-score');
 const scoreResultDisplay = document.getElementById('score-results');
 const viewHighscore = document.getElementById('view-highscores');
+var timerDisplay = document.getElementById('timer-count');
+var isWin = false;
 var scoreCounter = 0;
 var highscoresArr = [];
-
-var timerDisplay = document.getElementById('timer-count');
 var time = 60;
 
-var currentQuestionIndex = 0;
-var currentQuestionNumber = 1;
+var qIndex = 0;
+var currentQ = 1;
 var highscore = localStorage.getItem("highscore");
 var initials = localStorage.getItem('initials')
-
-//* START WORKING CODE
-questionContainer.setAttribute('style', 'display:none');
-signScore.setAttribute('style', 'display: none;');
-viewHighscore.setAttribute('style', 'display: none;');
 
 //* QUESTION POOL
 var questions = [
@@ -65,70 +56,75 @@ var questions = [
     }
 ]
 
-//* START GAME
-    startButton.addEventListener("click", startGame);
-    function startGame() {
-        startCard.setAttribute('style', 'display: none;');
-        // new question array
-        shuffledQuestions = questions.sort(() => Math.random() - .5);
+//* START GAME--------------------------------------------------------------
+startButton.addEventListener("click", startGame);
+function startGame() {
+    startCard.setAttribute('style', 'display: none;');
+    // new question array
+    shuffledQs = questions.sort(() => Math.random() - .5);
 
-        // displays question and starts timer
-        setQuestion();
-        startTimer();
+    // displays question and starts timer
+    setQuestion();
+    startTimer();
 
-    }
+}
 
-//* START TIMER
-    function startTimer(){
-        
-        var timerInterval = setInterval(function(){
-            timerDisplay.textContent = time + " s";
-            time--;
+//* START TIMER---------------------------------------------------------------
+function startTimer() {
+    // Sets timer
+    timer = setInterval(function () {
+        time--;
+        timerDisplay.textContent = time + ' s';
+        if (time >= 0) {
+            // Tests if win condition is met
+            if (isWin && time > 0) {
+                // Clears interval and stops timer
+                clearInterval(timer);
+                winGame();
+            }
+        }
+        // Tests if time has run out
+        if (time === 0) {
+            // Clears interval
+            clearInterval(timer);
+            gameover();
+        }
+    }, 1000);
+}
 
-            if (time === 1) {
-                clearInterval(timerInterval);
-                // gameOver();
-            } else  if(currentQuestionNumber >= shuffledQuestions.length +1) {
-                clearInterval(timerInterval);
-                // gameOver();
-                } 
-            }, 1000);
-    }
 
+//*  SETS QUESTIONS PAGE AND SHUFFLE QUESTIONS------------------------------------
+function setQuestion() {
+    // make question container visible
+    questionContainer.setAttribute('style', 'display: block;')
+    // call showQuestion() with shuffled questions
+    showQuestion(shuffledQs[qIndex])
+}
 
-//*  SETS QUESTIONS IN THE QUIZ
-    function setQuestion(){
-        questionContainer.setAttribute('style', 'display: block;')
-        showQuestion(shuffledQuestions[currentQuestionIndex])
-    }
-
-//* SETS CURRENT QUESTION TO PAGE
-function showQuestion(){
-    quizQuestion.textContent=questions[currentQuestionIndex].question;
+//* SETS SHUFFLED QUESTIONS TO PAGE---------------------------------------------
+function showQuestion() {
+    // display current question
+    quizQuestion.textContent = questions[qIndex].question;
+    // display current and corresponding questions
     for (i = 0; i < answerPool.children.length; i++) {
-        answerPool.children[i].textContent = shuffledQuestions[currentQuestionIndex].choices[i];
+        answerPool.children[i].textContent = shuffledQs[qIndex].choices[i];
     };
 }
 
-//* CHECK ANSWER
-    answerButtons.addEventListener('click', checkAnswer)
-    function checkAnswer(event) {
-        if (event.currentTarget == shuffledQuestions[currentQuestionIndex].correct) {
-                // add 10 points and give me another question until there are no more, and all points are added up  
-                scoreCounter = scoreCounter + 10; 
-            if (currentQuestionIndex < shuffledQuestions.length -1) {
-                setQuestion(currentQuestionIndex + 1);
-                } else {
-                    // gameOver();
-                }
-                currentQuestionNumber++;
-            } else {
-                // deduct 10 seconds from timer, got to next question, display answer
-                time = time - 10;
-            }
-        // }
-
+//* CHECKS ANSWER-------------------------------------------------------------------
+answerButtons.addEventListener("click", function (event) {
+    checkAnswer(event.target);
+    console.log("clicked");
+    // set next question
+})
+function checkAnswer(event) {
+    if (shuffledQs[qIndex].correct == shuffledQs[qIndex].choices[event.target]) {
+        scoreCounter += 10;
+        console.log(scoreCounter);
+    } else {
+        time = time - 10;
     }
+}
 
 
 // function setScore() {
@@ -172,7 +168,7 @@ function showQuestion(){
 
 //     if(highscore !== null){
 //         if (score > highscore) {
-//             localStorage.setItem("highscore", score);      
+//             localStorage.setItem("highscore", score);
 //         }
 //     }
 //     else{
