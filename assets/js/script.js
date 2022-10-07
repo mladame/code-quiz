@@ -79,14 +79,13 @@ function startTimer() {
             // Tests if win condition is met
             if (isWin && time > 0) {
                 // Clears interval and stops timer
-                clearInterval(timer);
+                gameover();
                 winGame();
             }
         }
         // Tests if time has run out
         if (time === 0) {
             // Clears interval
-            clearInterval(timer);
             gameover();
         }
     }, 1000);
@@ -113,10 +112,6 @@ function renderQuestion() {
 
 //* CHECKS ANSWER-------------------------------------------------------------------
 document.getElementById("answer-pool").addEventListener("click", checkAnswer);
-    // checkAnswer(event.target);
-    // console.log("clicked");
-    // set next question
-
 function checkAnswer(event) {
     const answer = event.target;
     console.log(answer.innerHTML);
@@ -126,8 +121,30 @@ function checkAnswer(event) {
     } else {
         time = time - 10;
     }
+    // go to next question
+    nextQuestion();
+
 }
 
+//* SET NEXT QUESTION------------------------------------------------------------------
+function nextQuestion() {
+    // increment current question index
+    qIndex++;
+    // render 6 questions
+    if (qIndex < 6) {
+        renderQuestion();
+    } else {
+        gameover();
+        scoreResultDisplay.textContent = scoreCounter;
+        questionContainer.setAttribute('style', 'display:none;');
+        signScore.setAttribute('style', 'display: flex;');
+    }
+
+} 
+
+function gameover() {
+    clearInterval(timer);
+}
 
 // function setScore() {
 //     scoreResultDisplay.textContent = scoreCounter;
