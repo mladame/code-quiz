@@ -30,11 +30,8 @@ header {
     font-size: 25px;
 }
 
-.timer h3 {
-    color: gray;
-}
-
 #timer-count {
+    font-size: 25px;
     text-align: center;
     margin: 21px;
     color: gray;
@@ -63,6 +60,10 @@ header {
     padding-bottom: 20px;
 }
 
+.start-game {
+    display: none;
+}
+
 .start-btn{
     background-color: var(--seagreen);
     border: none;
@@ -83,8 +84,7 @@ header {
 
 /*  QUESTION CARDS---------------------------------- */
 #question-container,
-#sign-score,
-#view-highscores {
+#sign-score {
     display: none;
 }
 
@@ -143,11 +143,15 @@ header {
     font-size: 35px;
 }
 
+.initials {
+    display: block;
+}
+
 label {
     font-size: 30px;
 }
 
-input[type=text] {
+/* input[type=text] {
     width: 300px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -155,6 +159,16 @@ input[type=text] {
     border-radius: 10px;
     background-color: white;
     text-align: center;
+} */
+.user-input {
+    resize: none;
+    width: 300px;
+    margin: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    font-size: 20px;
 }
 
 input[type=submit] {
@@ -166,11 +180,19 @@ input[type=submit] {
     text-align: center;
     text-decoration: none;
     font-size: 20px;
+    display: block;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
 }
 
 /* VIEW HIGHSCORE----------------------------- */
-.view-highscores h2 {
+.view-highscores {
     font-size: 30px;
+}
+
+.view-highscores h2 {
+    font-size: 50px;
 }
 
 .go-back,
@@ -193,11 +215,22 @@ input[type=submit] {
     box-shadow: 0 5px 15px var(--darkseagreen);
 }
 
-table{
+/* table{
     background-color: floralwhite;
     border: 0;
     text-align: center;
     width: 279px;
+} */
+
+.highscore-table {
+    background-color: floralwhite;
+    border: 0;
+    text-align: center;
+    width: 279px;
+}
+
+tr {
+    padding: 5px;
 }
 
 .table-headers{

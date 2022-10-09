@@ -10,7 +10,8 @@ const answerPool = document.getElementById('answer-pool');
 
 const signScore = document.getElementById('sign-score');
 const scoreResultDisplay = document.getElementById('score-result');
-const userInitials = document.getElementById('initials');
+// const userInitials = document.getElementById('initials');
+const userInput = document.querySelector('.user-input');
 const viewHighscore = document.getElementById('view-highscores');
 var timerDisplay = document.getElementById('timer-count');
 var isWin = false;
@@ -20,8 +21,8 @@ var time = 60;
 
 var qIndex = 0;
 var currentQ = 1;
-var highscore = localStorage.getItem("highscore");
-var initials = localStorage.getItem('initials')
+// var highscore = localStorage.getItem("highscore");
+// var initials = localStorage.getItem('initials')
 
 //* QUESTION POOL
 var questions = [
@@ -75,7 +76,7 @@ function startTimer() {
     // Sets timer
     timer = setInterval(function () {
         time--;
-        timerDisplay.textContent = time + ' s';
+        timerDisplay.textContent = 'Time: ' + time + ' s';
         if (time >= 0) {
             // Tests if win condition is met
             if (isWin && time > 0) {
@@ -114,7 +115,7 @@ function renderQuestion() {
 //* CHECKS ANSWER---------------------------------------------------------------
 document.getElementById("answer-pool").addEventListener("click", checkAnswer);
 function checkAnswer(event) {
-    
+
     const answer = event.target;
     if (shuffledQs[qIndex].correct == answer.innerHTML) {
         scoreCounter += 10;
@@ -142,39 +143,53 @@ function nextQuestion() {
         timerDisplay.textContent = '0';
     }
 
-} 
+}
 
 //* GAME OVER---------------------------------------------------------------- 
 function gameover() {
     clearInterval(timer);
 }
 
-//* SIGN HIGHSCORE------------------------------------------------------------
+//* SIGN AND SAVE HIGHSCORE-------------------------------------------------------
 document.getElementById("submit-signature").addEventListener("click", setScore);
 function setScore() {
+
+    let topScores = JSON.parse(localStorage.getItem('scoreboard')) || [];
+
     // get existing scores
-    if (!!localStorage.getItem('scoreboard')){
-        let previousScores = JSON.parse(localStorage.getItem('scoreboard'));
-        highscoresArr.push(previousScores);
-    }
+    // if (topScores === true) {
+
+        highscoresArr.push(topScores);
+        console.log('hello');
+    // }
     // define new score
     const signature = userInitials.value.trim();
-    const highScores = {
+    console.log(signature);
+    const highScore = {
         user: signature,
         score: scoreCounter
     };
+
     // save new score with existing scores and save to local storage
-    highscoresArr.push(highScores)
-    localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
+    if (scoreCounter >= highscoresArr.topScores.score) {
+        if (highscoresArr.length === 3) {
+            highscoresArr.unshift(highScore);
+            let newHighscore = highscoresArr.pop();
+            localStorage.setItem("scoreboard", JSON.stringify(newHighscore));
+        } else if (highscoresArr.length < 3) {
+            highscoresArr.unshift(highScores);
+            localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
+        }
+    }
 
     signScore.setAttribute('style', 'display:none;');
-    viewHighscore.setAttribute('style', 'display:block;')
+    viewHighscore.setAttribute('style', 'display:flex;');
 
-    getScore();
+    // getScore();
 }
 
-//* VIEW HIGH SCORES------------------------------------------------------------- 
-document.getElementById("highscore-btn").addEventListener("click", getScore);
+//* VIEW HIGH SCORES-------------------------------------------------------------
+// document.getElementById("highscore-btn").addEventListener("click", getScore);
 // function getScore() {
 //     var storedScore = localStorage.getItem("scoreboard");
 //     if (storedScore === null) {
@@ -199,3 +214,9 @@ document.getElementById("highscore-btn").addEventListener("click", getScore);
 //         localStorage.setItem("highscore", score);
 //     }
 // }
+
+//* CLEAR HIGH SCORES------------------------------------------------------------
+document.getElementById("clear-scores").addEventListener("click", clearStorage);
+function clearStorage() {
+    localStorage.removeItem('scoreboard');
+}
