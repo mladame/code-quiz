@@ -12,7 +12,6 @@
 /* ------HEADER----- */
 header {
     overflow: hidden;
-
 }
 
 .highscore-btn{
@@ -58,10 +57,6 @@ header {
 .game-description {
     font-size: 25px;
     padding-bottom: 20px;
-}
-
-.start-game {
-    /* display: none; */
 }
 
 .start-btn{
@@ -152,15 +147,6 @@ label {
     font-size: 30px;
 }
 
-/* input[type=text] {
-    width: 300px;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border-radius: 10px;
-    background-color: white;
-    text-align: center;
-} */
 .user-input {
     resize: none;
     width: 300px;
@@ -216,22 +202,23 @@ input[type=submit] {
     box-shadow: 0 5px 15px var(--darkseagreen);
 }
 
-/* table{
-    background-color: floralwhite;
-    border: 0;
-    text-align: center;
-    width: 279px;
-} */
-
 .highscore-table {
-    background-color: floralwhite;
-    border: 0;
-    text-align: center;
-    width: 279px;
+    border: 1px solid var(--seagreen);
+    padding: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
-tr {
+tr,
+th,
+td {
+    font-size: 35px;
     padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: floralwhite;
 }
 
 .table-headers{
