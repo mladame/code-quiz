@@ -21,6 +21,10 @@ header {
     height: 60px;
 }
 
+.highscore-btn:hover {
+    color: blue;
+}
+
 .timer{
     float: right;
     display: flex;

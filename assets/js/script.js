@@ -77,14 +77,11 @@ function startTimer() {
         if (time >= 0) {
             // Tests if win condition is met
             if (isWin && time > 0) {
-                // Clears interval and stops timer
                 gameover();
-                winGame();
             }
         }
         // Tests if time has run out
         if (time === 0) {
-            // Clears interval
             gameover();
         }
     }, 1000);
@@ -150,7 +147,7 @@ function gameover() {
 //* SIGN AND SAVE HIGHSCORE-------------------------------------------------------
 document.getElementById("submit-signature").addEventListener("click", setScore);
 function setScore() {
-
+    
     let topScores = JSON.parse(localStorage.getItem('scoreboard'));
 
     if (topScores) {
@@ -169,19 +166,13 @@ function setScore() {
     // set local storage
     highscoresArr.push(highScore);
     localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
-
     getScore();
 }
 
 //* VIEW HIGH SCORES-------------------------------------------------------------
 document.getElementById("view-scoreboard").addEventListener("click", getScore);
 function getScore() {
-
-    // change display
-    startCard.setAttribute('style', 'display: none;');
-    signScore.setAttribute('style', 'display: none;');
-    viewHighscore.setAttribute('style', 'display:block;');
-
+    
     // get local storage
     let topScores = JSON.parse(localStorage.getItem('scoreboard'));
     topScores.sort((a, b) => b.score - a.score);
@@ -197,6 +188,12 @@ function getScore() {
             cell2.innerHTML = topScores[i].score;
         }
     } 
+
+            // change display
+        startCard.setAttribute('style', 'display: none;');
+        signScore.setAttribute('style', 'display: none;');
+        viewHighscore.setAttribute('style', 'display: block;');
+        return;
 }
 
 //* CLEAR HIGH SCORES------------------------------------------------------------
