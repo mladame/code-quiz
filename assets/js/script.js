@@ -158,10 +158,11 @@ function setScore() {
     let topScores = JSON.parse(localStorage.getItem('scoreboard'));
 
     if (topScores) {
-        highscoresArr.push(topScores);
+        for (let i=0; i < topScores.length; i++) {
+            highscoresArr.push(topScores[i]);
+        }
+        
     }
-    
-        // console.log('hello');
 
     // define new score
     const signature = userInput.value.trim();
@@ -172,6 +173,7 @@ function setScore() {
     };
 
     highscoresArr.push(highScore);
+    console.log(highscoresArr);
     localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
     // save new score with existing scores and save to local storage
     // if (scoreCounter >= highscoresArr.topScores.score) {
@@ -185,15 +187,19 @@ function setScore() {
     //     }
     // }
 
-    signScore.setAttribute('style', 'display:none;');
-    viewHighscore.setAttribute('style', 'display:flex;');
+    // signScore.setAttribute('style', 'display:none;');
+    // viewHighscore.setAttribute('style', 'display:flex;');
 
     // getScore();
 }
 
 //* VIEW HIGH SCORES-------------------------------------------------------------
-// document.getElementById("highscore-btn").addEventListener("click", getScore);
-// function getScore() {
+document.getElementById("view-scoreboard").addEventListener("click", getScore);
+function getScore() {
+    
+    startCard.setAttribute('style', 'display: none;');
+    signScore.setAttribute('style', 'display:none;');
+    viewHighscore.setAttribute('style', 'display:block;');
 
 //     var storedScore = localStorage.getItem("scoreboard");
 //     if (storedScore === null) {
@@ -206,7 +212,7 @@ function setScore() {
 
 
 
-// }
+}
 
 //* CLEAR HIGH SCORES------------------------------------------------------------
 document.getElementById("clear-scores").addEventListener("click", clearStorage);
