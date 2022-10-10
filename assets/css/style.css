@@ -61,7 +61,7 @@ header {
 }
 
 .start-game {
-    display: none;
+    /* display: none; */
 }
 
 .start-btn{
@@ -84,6 +84,7 @@ header {
 
 /*  QUESTION CARDS---------------------------------- */
 #question-container,
+#view-highscores,
 #sign-score {
     display: none;
 }

@@ -11,6 +11,7 @@ const answerPool = document.getElementById('answer-pool');
 const signScore = document.getElementById('sign-score');
 const scoreResultDisplay = document.getElementById('score-result');
 // const userInitials = document.getElementById('initials');
+// const userInitials = document.querySelector('.user')
 const userInput = document.querySelector('.user-input');
 const viewHighscore = document.getElementById('view-highscores');
 var timerDisplay = document.getElementById('timer-count');
@@ -154,33 +155,35 @@ function gameover() {
 document.getElementById("submit-signature").addEventListener("click", setScore);
 function setScore() {
 
-    let topScores = JSON.parse(localStorage.getItem('scoreboard')) || [];
+    let topScores = JSON.parse(localStorage.getItem('scoreboard'));
 
-    // get existing scores
-    // if (topScores === true) {
-
+    if (topScores) {
         highscoresArr.push(topScores);
-        console.log('hello');
-    // }
+    }
+    
+        // console.log('hello');
+
     // define new score
-    const signature = userInitials.value.trim();
+    const signature = userInput.value.trim();
     console.log(signature);
     const highScore = {
         user: signature,
         score: scoreCounter
     };
 
+    highscoresArr.push(highScore);
+    localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
     // save new score with existing scores and save to local storage
-    if (scoreCounter >= highscoresArr.topScores.score) {
-        if (highscoresArr.length === 3) {
-            highscoresArr.unshift(highScore);
-            let newHighscore = highscoresArr.pop();
-            localStorage.setItem("scoreboard", JSON.stringify(newHighscore));
-        } else if (highscoresArr.length < 3) {
-            highscoresArr.unshift(highScores);
-            localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
-        }
-    }
+    // if (scoreCounter >= highscoresArr.topScores.score) {
+    //     if (highscoresArr.length === 3) {
+    //         highscoresArr.unshift(highScore);
+    //         let newHighscore = highscoresArr.pop();
+    //         localStorage.setItem("scoreboard", JSON.stringify(newHighscore));
+    //     } else if (highscoresArr.length < 3) {
+    //         highscoresArr.unshift(highScores);
+    //         localStorage.setItem("scoreboard", JSON.stringify(highscoresArr));
+    //     }
+    // }
 
     signScore.setAttribute('style', 'display:none;');
     viewHighscore.setAttribute('style', 'display:flex;');
@@ -191,6 +194,7 @@ function setScore() {
 //* VIEW HIGH SCORES-------------------------------------------------------------
 // document.getElementById("highscore-btn").addEventListener("click", getScore);
 // function getScore() {
+
 //     var storedScore = localStorage.getItem("scoreboard");
 //     if (storedScore === null) {
 //         scoreCounter = 0;
@@ -201,18 +205,7 @@ function setScore() {
 // }
 
 
-// update high score/initials and save to local storage (map)
-//starter added, alter
-// function setHighscore() {
 
-//     if(highscore !== null){
-//         if (score > highscore) {
-//             localStorage.setItem("highscore", score);
-//         }
-//     }
-//     else{
-//         localStorage.setItem("highscore", score);
-//     }
 // }
 
 //* CLEAR HIGH SCORES------------------------------------------------------------
