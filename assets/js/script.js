@@ -131,10 +131,6 @@ function nextQuestion() {
         renderQuestion();
     } else {
         gameover();
-        questionContainer.setAttribute('style', 'display:none;');
-        signScore.setAttribute('style', 'display: block;');
-        scoreResultDisplay.textContent = scoreCounter;
-        timerDisplay.textContent = '0';
     }
 
 }
@@ -142,6 +138,10 @@ function nextQuestion() {
 //* GAME OVER---------------------------------------------------------------- 
 function gameover() {
     clearInterval(timer);
+    questionContainer.setAttribute('style', 'display:none;');
+    signScore.setAttribute('style', 'display: block;');
+    scoreResultDisplay.textContent = scoreCounter;
+    timerDisplay.textContent = '0';
 }
 
 //* SIGN AND SAVE HIGHSCORE-------------------------------------------------------
@@ -188,12 +188,14 @@ function getScore() {
             cell2.innerHTML = topScores[i].score;
         }
     } 
+    viewHighscoreDisplay()
+}
 
-            // change display
-        startCard.setAttribute('style', 'display: none;');
-        signScore.setAttribute('style', 'display: none;');
-        viewHighscore.setAttribute('style', 'display: block;');
-        return;
+function viewHighscoreDisplay() {
+    startCard.setAttribute('style', 'display: none;');
+    questionContainer.setAttribute('style', 'display: none;');
+    signScore.setAttribute('style', 'display: none;');
+    viewHighscore.setAttribute('style', 'display: block;');
 }
 
 //* CLEAR HIGH SCORES------------------------------------------------------------
